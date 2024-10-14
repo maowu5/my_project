@@ -598,7 +598,7 @@ textarea{
 
 /* 帖子样式 */
 .post {
-    background-color: #f9f9f9;
+    background-color: wheat;
     padding: 20px;
     width: 80%;
     border-radius: 10px;
@@ -613,7 +613,7 @@ textarea{
 
 .post {
     font-style: italic;
-    color: #555;
+    color: wheat;
     margin-top: 10px;
 }
 
