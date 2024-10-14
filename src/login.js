@@ -69,52 +69,52 @@ function autoRegister(username, password) {
 }
 
 document.getElementById('recharge-btn').addEventListener('click', function() {
-    // 向服务器发送请求，更新数据库中的余额
+    // 向服务器发送请求，增加余额
     fetch('/update_balance.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: username,  // 用户名，作为标识
-            balance: balance     // 新的余额
+            username: username,  // 当前用户名
+            rechargeAmount: 100  // 充值金额为100
         })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // 获取更新后的余额
+            // 充值成功后从数据库获取更新后的余额
             fetch('/get_balance.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: username  // 根据用户名获取最新余额
+                    username: username  // 当前用户名，用于获取余额
                 })
             })
             .then(response => response.json())
             .then(balanceData => {
                 if (balanceData.success) {
-                    // 更新页面上的余额显示
-                    balance = balanceData.balance;  // 从数据库获取的最新余额
-                    document.getElementById('account-balance').innerText = balance.toFixed(2);
-                    alert('Account recharged by 100. New balance:' + balance.toFixed(2));
+                    // 更新界面上显示的余额
+                    document.getElementById('account-balance').innerText = balanceData.balance.toFixed(2);
+                    alert('Account recharged by $100. New balance: $' + balanceData.balance);
                 } else {
-                    alert('Failed to retrieve updated balance from database.');
+                    alert('Failed to retrieve updated balance.');
                 }
             })
             .catch(error => {
-                console.error('Error fetching updated balance:', error);
+                console.error('Error fetching balance:', error);
             });
         } else {
-            alert('Failed to update balance: ' + data.message);
+            alert('Failed to recharge: ' + data.message);
         }
     })
     .catch(error => {
         console.error('Error updating balance:', error);
     });
 });
+
 
 // 退出登录功能
 document.getElementById('logout-btn').addEventListener('click', function() {
