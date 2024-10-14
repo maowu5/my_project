@@ -1,12 +1,13 @@
 <?php
 session_start();
-$response = [];
-$response['loggedin'] = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+$response = array();
 
-if ($response['loggedin']) {
+if (isset($_SESSION['user_id'])) {
+    $response['isLoggedIn'] = true;
     $response['username'] = $_SESSION['username'];
-    $response['balance'] = $_SESSION['balance'];
-} 
+} else {
+    $response['isLoggedIn'] = false;
+}
 
 echo json_encode($response);
 ?>
