@@ -46,7 +46,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             .then(response => response.json())
             .then(balanceData => {
                 if (balanceData.success) {
-                    balance = balanceData.balance;  // 更新 balance 变量
+                    balance = parseFloat(balanceData.balance);  // 更新 balance 变量
                     document.getElementById('account-balance').innerText = balance.toFixed(2);
                 } else {
                     alert('Failed to retrieve balance.');
@@ -120,7 +120,7 @@ document.getElementById('recharge-btn').addEventListener('click', function() {
             .then(response => response.json())
             .then(balanceData => {
                 if (balanceData.success) {
-                    balance = balanceData.balance;
+                    balance = parseFloat(balanceData.balance);
                     document.getElementById('account-balance').innerText = balance.toFixed(2);
                     alert('Account recharged by $100. New balance: $' + balance.toFixed(2));
                 } else {
