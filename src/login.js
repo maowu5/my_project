@@ -1,6 +1,7 @@
 // 初始化登录状态
 let isLoggedIn = false;
 let username = "";
+let balance = 0; 
 
 // 处理用户登录与自动注册
 document.getElementById('login-form').addEventListener('submit', function(event) {
