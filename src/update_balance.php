@@ -21,7 +21,7 @@ $username = $data['username'];  // 从会话中获取用户名
 $rechargeAmount = $data['rechargeAmount'];
 
 // 验证充值金额是否有效
-if (!is_numeric($rechargeAmount) || empty($username)) {
+if (empty($username)) {
     echo json_encode(['success' => false, 'message' => 'Invalid recharge amount or username.']);
     error_log('Invalid recharge amount or username in update_balance.php');  // 记录错误日志
     exit;
