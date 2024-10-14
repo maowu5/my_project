@@ -224,6 +224,32 @@ function updateCartItemInDatabase(productId, quantity) {
     });
 }
 
+// 页面加载时获取用户的余额
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('/get_balance.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username  // 用户名，可能在登录时已经设置
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            balance = data.balance;
+            document.getElementById('account-balance').textContent = balance.toFixed(2);  // 更新页面余额显示
+        } else {
+            alert('Failed to fetch balance: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching balance:', error);
+    });
+});
+
+// 结算逻辑
 document.getElementById('checkout-btn').addEventListener('click', function () {
     const totalAmount = parseFloat(document.getElementById('total-amount').textContent);
 
