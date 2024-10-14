@@ -36,17 +36,17 @@ function loadPosts() {
                         <div class="post">
                             <h3>${post.title}</h3>
                             <p>${post.content}</p>
-                            <p class="author">作者: ${post.author}</p>
+                            <p class="author">Author: ${post.author}</p>
                         </div>
                     `;
                     postsContainer.insertAdjacentHTML('beforeend', postHTML);
                 });
             } else {
-                console.error('加载帖子失败');
+                console.error('Fail');
             }
         })
         .catch(error => {
-            console.error('获取帖子错误:', error);
+            console.error('error:', error);
         });
 }
 
@@ -59,7 +59,7 @@ window.onload = function () {
 // 打开发布帖子浮窗
 function openPostForm() {
     if (!isLoggedIn) {
-        alert('请登录后再发帖!');
+        alert('Please login!');
         return;
     }
     document.getElementById('post-modal').style.display = 'block';
@@ -75,7 +75,7 @@ document.getElementById('post-form').addEventListener('submit', function(event) 
     event.preventDefault();
 
     if (!isLoggedIn) {
-        alert('请登录后再发帖!');
+        alert('Please login!');
         return;
     }
 
@@ -110,10 +110,10 @@ document.getElementById('post-form').addEventListener('submit', function(event) 
             document.getElementById('post-form').reset(); // 重置表单
             closePostForm(); // 关闭发帖浮窗
         } else {
-            alert('发帖失败，请重试！');
+            alert('Fail！');
         }
     })
     .catch(error => {
-        console.error('发帖错误:', error);
+        console.error('error:', error);
     });
 });
