@@ -17,7 +17,7 @@ if (!isset($data['username']) || !isset($data['rechargeAmount'])) {
     exit;
 }
 
-$username = $data['username'];
+$username = $_SESSION['username'];  // 从会话中获取用户名
 $rechargeAmount = $data['rechargeAmount'];
 
 // 验证充值金额是否有效
