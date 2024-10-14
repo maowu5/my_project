@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('db_connection.php'); // 包含数据库连接
 
 // 准备 SQL 查询，获取所有帖子，按创建时间降序排序
