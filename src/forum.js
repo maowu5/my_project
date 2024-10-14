@@ -52,12 +52,12 @@ function loadPosts() {
 
 // 页面加载时检查登录状态并加载帖子
 window.onload = function () {
-    checkLoginStatus();
     loadPosts(); // 加载已有帖子
 };
 
 // 打开发布帖子浮窗
 function openPostForm() {
+    checkLoginStatus()
     if (!isLoggedIn) {
         alert('Please login!');
         return;
@@ -73,7 +73,7 @@ function closePostForm() {
 // 发布帖子
 document.getElementById('post-form').addEventListener('submit', function(event) {
     event.preventDefault();
-
+    checkLoginStatus()
     if (!isLoggedIn) {
         alert('Please login!');
         return;
