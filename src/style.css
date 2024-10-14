@@ -627,8 +627,6 @@ textarea{
 }
 
 /* 登录页面 */
-
-
 .login-container {
     width: 100%;
     max-width: 400px;
@@ -674,6 +672,7 @@ textarea{
 }
 
 #account-info {
+    margin-top: 100px;
     text-align: center; /* 确保文本内容居中 */
 }
 
