@@ -1,4 +1,5 @@
 <?php
+session_start();
 // 引入数据库连接文件
 include 'db_connection.php';
 
