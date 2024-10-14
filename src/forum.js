@@ -3,20 +3,25 @@ let username = ""; // 当前登录用户的用户名
 
 // 检查登录状态
 function checkLoginStatus() {
-    fetch('/check_login.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.isLoggedIn) {
-                isLoggedIn = true;
-                username = data.username;
-            } else {
-                isLoggedIn = false;
-                username = "";
-            }
-        })
-        .catch(error => {
-            console.error('error:', error);
-        });
+    fetch('/check_login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.loggedin) {
+            isLoggedIn = true;
+            username = data.username;
+        } else {
+            isLoggedIn = false;
+            username = "";
+        }
+    })
+    .catch(error => {
+        console.error('Error checking login status:', error);
+    });
 }
 
 // 加载数据库中的帖子
