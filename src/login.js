@@ -28,8 +28,8 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             isLoggedIn = true;
             username = data.username; // 保存用户名
             // 显示账户信息，隐藏登录表单
-            document.getElementById('login-form-container').style.display = 'none';
-            document.getElementById('account-info').style.display = 'block';
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('account-info-container').style.display = 'block';
             document.getElementById('account-username').innerText = username;
             document.getElementById('account-balance').innerText = balance;
         } else {
