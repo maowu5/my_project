@@ -120,8 +120,9 @@ document.getElementById('recharge-btn').addEventListener('click', function() {
             .then(balanceData => {
                 if (balanceData.success) {
                     // 更新界面上显示的余额
-                    document.getElementById('account-balance').innerText = balanceData.balance.toFixed(2);
-                    alert('Account recharged by $100. New balance: $' + balanceData.balance);
+                    balance = balanceData.balance;
+                    document.getElementById('account-balance').innerText = balance.toFixed(2);
+                    alert('Account recharged by 100. New balance: ' + balance.toFixed(2));
                 } else {
                     alert('Failed to retrieve updated balance.');
                 }
