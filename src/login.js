@@ -32,7 +32,26 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             document.getElementById('login-form-container').style.display = 'none';
             document.getElementById('account-info').style.display = 'block';
             document.getElementById('account-username').innerText = username;
-            document.getElementById('account-balance').innerText = balance;
+             fetch('/get_balance.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username
+                })
+                .then(response => response.json())
+                .then(balanceData => {
+                if (balanceData.success) {
+                    balance = balanceData.balance;  // 更新 balance 变量
+                    document.getElementById('account-balance').innerText = balance.toFixed(2);
+                } else {
+                    alert('Failed to retrieve balance.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching balance:', error);
+            });
         } else {
             // 如果登录失败，自动注册
             alert('The user is not registered and is being automatically registered...');
