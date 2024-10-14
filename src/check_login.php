@@ -6,22 +6,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $response['loggedin'] = true;
     $response['username'] = $_SESSION['username'];
     // 确保从数据库或会话中获取余额
-    if (isset($_SESSION['balance'])) {
-        $response['balance'] = $_SESSION['balance'];
+    include 'db_connection.php';
+    $sql = "SELECT balance FROM users WHERE username = :username";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':username', $_SESSION['username']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $response['balance'] = $result['balance'];
+        $_SESSION['balance'] = $result['balance'];  // 更新会话中的余额
     } else {
-        // 如果会话中没有余额信息，从数据库中重新查询
-        include 'db_connection.php';
-        $sql = "SELECT balance FROM users WHERE username = :username";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $_SESSION['username']);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            $response['balance'] = $result['balance'];
-            $_SESSION['balance'] = $result['balance'];  // 更新会话中的余额
-        } else {
-            $response['balance'] = 0;  // 如果查询失败，返回0
-        }
+        $response['balance'] = 0;  // 如果查询失败，返回0
     }
 } else {
     // 用户未登录
