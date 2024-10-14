@@ -28,21 +28,25 @@ if (!is_numeric($rechargeAmount) || empty($username)) {
 }
 
 // 更新用户余额
-try {
-    $sql = "UPDATE users SET balance = balance + :rechargeAmount WHERE username = :username";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':rechargeAmount', $rechargeAmount, PDO::PARAM_INT);
-    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+$sql = "UPDATE users SET balance = balance + :rechargeAmount WHERE username = :username";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':rechargeAmount', $rechargeAmount, PDO::PARAM_INT);
+$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
-    if ($stmt->execute()) {
-        echo json_encode(['success' => true]);
-        error_log('Balance updated successfully for user: ' . $username);  // 记录成功日志
+if ($stmt->execute()) {
+    // 更新会话中的余额
+    $sql = "SELECT balance FROM users WHERE username = :username";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $_SESSION['balance'] = $result['balance'];  // 更新会话中的余额
+        echo json_encode(['success' => true, 'balance' => $result['balance']]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Failed to update balance.']);
-        error_log('Failed to update balance for user: ' . $username);  // 记录失败日志
     }
-} catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
-    error_log('Error in update_balance.php: ' . $e->getMessage());  // 捕获异常并记录日志
+} else {
+    echo json_encode(['success' => false, 'message' => 'Failed to recharge.']);
 }
 ?>
