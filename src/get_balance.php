@@ -3,26 +3,29 @@
 session_start();
 include 'db_connection.php';
 
-// 获取请求数据
-$data = json_decode(file_get_contents('php://input'), true);
-$username = $data['username'];
-
-// 查询用户余额
-$sql = "SELECT balance FROM users WHERE username = :username";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':username', $username);
-
-if ($stmt->execute()) {
+$response = [];
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // 从会话或数据库获取余额
+    include 'db_connection.php';
+    $username = $_SESSION['username'];
+    
+    $sql = "SELECT balance FROM users WHERE username = :username";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
-        $balance = (float) $result['balance'];
-        echo json_encode(['success' => true, 'balance' => $result['balance']]);
-        error_log('Balance retrieved successfully for user: ' . $username);  // 记录成功日志
+        $response['success'] = true;
+        $response['balance'] = $result['balance'];  // 返回余额
     } else {
-        echo json_encode(['success' => false, 'message' => 'User not found.']);
+        $response['success'] = false;
+        $response['message'] = 'User not found or balance retrieval failed.';
     }
 } else {
-    error_log('Failed to fetch balance for user: ' . $username);  // 记录失败日志
-    echo json_encode(['success' => false, 'message' => 'Failed to fetch balance.']);
+    $response['success'] = false;
+    $response['message'] = 'User not logged in.';
 }
+
+echo json_encode($response);
 ?>
