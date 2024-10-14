@@ -9,11 +9,9 @@ function checkLoginStatus() {
             if (data.isLoggedIn) {
                 isLoggedIn = true;
                 username = data.username;
-                document.getElementById('login-message').innerText = `Welcome, ${username}`;
             } else {
                 isLoggedIn = false;
                 username = "";
-                document.getElementById('login-message').innerText = 'Please Login';
             }
         })
         .catch(error => {
