@@ -14,6 +14,7 @@ $stmt->bindParam(':username', $username);
 if ($stmt->execute()) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
+        $balance = (float) $result['balance'];
         echo json_encode(['success' => true, 'balance' => $result['balance']]);
         error_log('Balance retrieved successfully for user: ' . $username);  // 记录成功日志
     } else {
