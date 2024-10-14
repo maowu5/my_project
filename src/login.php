@@ -18,7 +18,6 @@ if ($user && password_verify($password, $user['password_hash'])) {
     // 登录成功，保存会话状态
     $_SESSION['loggedin'] = true;
     $_SESSION['username'] = $username;
-    $_SESSION['balance'] = $user['balance'];
     
     echo json_encode(['success' => true, 'username' => $username]);
 } else {
