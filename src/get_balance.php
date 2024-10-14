@@ -1,5 +1,6 @@
 <?php
 // 引入数据库连接文件
+session_start();
 include 'db_connection.php';
 
 // 获取请求数据
