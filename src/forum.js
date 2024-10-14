@@ -105,7 +105,7 @@ document.getElementById('post-form').addEventListener('submit', function(event) 
                 <div class="post">
                     <h3>${title}</h3>
                     <p>${content}</p>
-                    <p class="author">作者: ${username}</p>
+                    <p class="author">Author: ${username}</p>
                 </div>
             `;
 
