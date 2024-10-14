@@ -170,6 +170,7 @@ document.getElementById('recharge-btn').addEventListener('click', function() {
 
 // 退出登录功能
 document.getElementById('logout-btn').addEventListener('click', function() {
+    window.location.href = '/logout.php';  // 调用注销功能
     isLoggedIn = false;
     username = "";
     balance = 100;  // 退出后重置余额
