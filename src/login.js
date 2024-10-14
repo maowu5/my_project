@@ -70,7 +70,7 @@ function autoRegister(username, password) {
 
 document.getElementById('recharge-btn').addEventListener('click', function() {
     balance += 100;  // 每次点击充值 100
-    document.getElementById('account-balance').innerText = balance;
+    document.getElementById('account-balance').innerText = balance.toFixed(2);
 
     // 向服务器发送请求，更新数据库中的余额
     fetch('/update_balance.php', {
