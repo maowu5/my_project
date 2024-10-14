@@ -1,12 +1,14 @@
 <?php
 session_start();
-$response = array();
-
-if (isset($_SESSION['user_id'])) {
-    $response['isLoggedIn'] = true;
+$response = [];
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // 用户已登录，返回用户信息
+    $response['loggedin'] = true;
     $response['username'] = $_SESSION['username'];
+    $response['balance'] = $_SESSION['balance'];
 } else {
-    $response['isLoggedIn'] = false;
+    // 用户未登录
+    $response['loggedin'] = false;
 }
 
 echo json_encode($response);
