@@ -1,0 +1,691 @@
+/* 使用自定义字体 */
+body {
+    font-family: 'ZCOOL KuaiLe', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    background-image: url('./img/bg.jpg'); /* 背景图片路径 */
+    background-size: cover; /* 确保图片覆盖整个页面 */
+    background-position: center; /* 图片居中显示 */
+    background-repeat: no-repeat; /* 禁止重复 */
+    height: 100vh; /* 让背景图填满整个页面高度 */
+}
+
+/* 导航栏样式 */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%; /* 导航栏宽度为全屏 */
+    background-color: rgba(0, 0, 0, 0.5); /* 只让背景颜色透明 */
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 20px;
+    display: flex; /* 使导航链接横向排列 */
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 50px; /* 更改字体大小 */
+}
+
+nav ul li a:hover {
+    background-color: rgba(0,0,0,0.28);
+}
+
+/* 登录按钮单独样式 */
+.login-button {
+    margin-left: auto; /* 使登录按钮位于最右侧 */
+}
+
+.login-button a {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.login-button a:hover {
+    background-color: #45a049;
+}
+
+.hero-image {
+    height: 100vh;
+    width: 100%; /* 确保图片宽度覆盖整个页面 */
+    margin: 0; /* 移除默认的 margin */
+    padding: 0; /* 移除默认的 padding */
+}
+/* 背景图片样式 */
+.hero-image img {
+    width: 100%; /* 使图片宽度覆盖整个页面 */
+    height: 100%; /* 设置图片高度为浏览器高度 */
+    object-fit: cover; /* 保证图片内容填满区域，不拉伸 */
+    opacity: 0.7; /* 透明度设置为70% */
+    display: block; /* 移除默认间距 */
+}
+
+/* 文字在图片上显示 */
+.hero-text {
+    position: absolute;
+    top: 15%; /* 调整文本距离顶部的距离 */
+    left: 10%; /* 调整文本距离左侧的距离 */
+    right: 10%; /* 保证文字不会靠右边缘 */
+    color: orange;/* 文字颜色为白色 */
+    text-align: center; /* 文本居中 */
+    font-size: 40px; /* 使用固定的像素值来控制字体大小 */
+    line-height: 1.5; /* 增加行高，提升可读性 */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9); /* 添加黑色阴影，让文字更加明显 */
+    white-space: nowrap; /* 禁止文字换行 */
+    overflow: hidden; /* 如果文字超过容器，隐藏溢出的部分 */
+    text-overflow: ellipsis; /* 如果文字溢出，显示省略号 */
+}
+
+
+/* 设置 .hero-section 及其子元素的定位 */
+.hero-section {
+    position: relative;
+    text-align: center;
+    height: 100vh; /* 使整个区域的高度适应浏览器高度 */
+}
+
+
+/* 页脚整体容器 */
+footer {
+    background-color: #1f1f1f; /* 深色背景 */
+    color: #999; /* 浅灰色字体 */
+    padding: 40px 0; /* 上下内边距 */
+    text-align: center;
+    width: 100%;
+}
+
+.footer-container {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 0 20px; /* 增加左右 padding 以适应不同屏幕 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 页脚链接部分 */
+.footer-links, .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 250px; /* 链接之间的间距 */
+    margin-bottom: 20px;
+}
+
+.footer-links a, .footer-social a {
+    color: #999;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.footer-links a:hover, .footer-social a:hover {
+    color: #fff; /* 悬停时变为白色 */
+}
+
+/* 页脚版权信息 */
+footer p {
+    margin-top: 20px;
+    color: #666;
+    font-size: 20px/* 更深的灰色字体 */
+}
+
+/* 作者简介区域样式 */
+.author-section {
+    background-color: wheat; /* 背景颜色 */
+    padding: 50px; /* 内边距 */
+    text-align: center;
+}
+
+.author-container {
+    max-width: 2000px; /* 限制区域宽度 */
+    margin: 0 auto;
+}
+
+.author-info {
+    display: flex; /* 使用flex布局来实现图片和文本并列 */
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: center; /* 水平居中 */
+    gap: 20px; /* 图片和文本之间的间距 */
+    text-align: left; /* 使文本左对齐 */
+}
+
+.author-image {
+    width: 500px; /* 设置图片的宽度 */
+    object-fit: contain; /* 保证图片按比例缩放，并完整显示 */
+}
+
+.author-text {
+    max-width: 1500px; /* 限制文本内容的宽度 */
+}
+
+.author-text h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: saddlebrown;
+}
+
+.author-text p {
+    font-size: 30px;
+    color: saddlebrown;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* 游戏截图区域样式 */
+.screenshots-section {
+    background-color: burlywood; /* 背景颜色 */
+    padding: 30px 30px; /* 内边距 */
+    text-align: center;
+}
+
+.screenshots-container {
+    margin: 0 auto;
+}
+
+.screenshots {
+    display: flex; /* 使用flexbox横向排列截图 */
+    justify-content: center; /* 图片居中对齐 */
+    gap: 50px; /* 图片之间的间距 */
+}
+
+.screenshot {
+    width: 600px; /* 固定每个截图的宽度 */
+    height: 600px;
+    object-fit: cover;
+    border-radius: 10px; /* 图片的圆角效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 为图片添加阴影 */
+}
+
+.screenshots-container h2 {
+    color: saddlebrown;
+}
+
+/* 游戏shop区域样式 */
+.ShowShop-section {
+    background-color: sandybrown; /* 背景颜色 */
+    padding: 30px 30px; /* 内边距 */
+    text-align: center;
+}
+
+.ShowShop-container {
+    margin: 0 auto;
+}
+
+.ShowShops {
+    display: flex; /* 使用flexbox横向排列截图 */
+    justify-content: center; /* 图片居中对齐 */
+    gap: 50px; /* 图片之间的间距 */
+}
+
+.ShowShop {
+    width: 600px; /* 固定每个截图的宽度 */
+    object-fit: cover; /* 保证图片内容不会变形 */
+    border-radius: 10px; /* 图片的圆角效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 为图片添加阴影 */
+}
+
+.ShowShop-container h2 {
+    color: saddlebrown;
+}
+
+/* 角色展示区域样式 */
+.characters-section {
+    background-image: url('./img/bg.jpg'); /* 设置背景图片 */
+    background-size: cover; /* 背景图片按比例覆盖整个区域 */
+    background-position: center; /* 图片居中显示 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    background-color: #f9f9f9; /* 背景颜色 */
+    padding: 50px 10px; /* 减少两侧的内边距 */
+    text-align: center;
+}
+
+.characters-container {
+    width: 75%; /* 宽度设置为100%，占满页面 */
+    margin: 0 auto;
+}
+
+.characters-container h2 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.characters-grid {
+    display: grid; /* 使用 CSS Grid 布局 */
+    grid-template-columns: repeat(4, 1fr); /* 每行4列 */
+    gap: 20px; /* 卡片之间的间距 */
+    padding: 0 20px; /* 为网格左右添加最小的内边距 */
+    margin-top: 150px;
+}
+
+.character-card {
+    background-color: wheat;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+}
+
+.character-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* 确保图片按比例缩放，显示中间部分 */
+    border-radius: 50%; /* 图片裁剪为圆形 */
+    margin-bottom: 15px;
+}
+
+.character-card h3 {
+    color: saddlebrown;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+
+.character-card p {
+    color: saddlebrown;
+    font-size: 30px;
+    line-height: 1.6;
+}
+
+/* 物品展示区域样式 */
+.items-section {
+    background-image: url('./img/bg.jpg'); /* 设置背景图片 */
+    background-size: cover; /* 背景图片按比例覆盖整个区域 */
+    background-position: center; /* 图片居中显示 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    background-color: #f9f9f9;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+/* 主网格：每个类别是一个单独的部分 */
+.main-grid {
+    width: 75%;
+    display: grid;
+    grid-template-columns: 1fr; /* 每行3列 */
+    gap: 30px;
+    margin: 100px auto; /* 上方留空100px，左右自动居中 */
+    padding: 0 20px; /* 为左右添加20px内边距 */
+}
+
+.category-grid {
+    padding: 20px;
+    background-color:burlywood;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-grid h2 {
+    margin-bottom: 15px;
+    color: saddlebrown;
+}
+
+/* 小网格：每个类别内部的物品 */
+.items-grid {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 每行3个物品 */
+    gap: 15px;
+}
+
+.item-card {
+    background-color: wheat;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex; /* 使用flexbox将图片与文字横向排列 */
+    align-items: center; /* 确保图片和文字在垂直方向居中 */
+    justify-content: flex-start; /* 保持图片和文字靠左对齐 */
+    text-align: center;
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    margin-right: 15px;
+}
+
+/* 商品展示区域样式 */
+.shop-section {
+    background-image: url('./img/bg.jpg'); /* 设置背景图片 */
+    background-size: cover; /* 背景图片按比例覆盖整个区域 */
+    background-position: center; /* 图片居中显示 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    padding: 50px;
+    text-align: center;
+}
+
+.shop-grid {
+    width: 75%; /* 宽度设置为100%，占满页面 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 每行4列商品 */
+    gap: 50px;
+    margin: 100px auto; /* 上方留空100px，左右自动居中 */
+    padding: 0 20px; /* 为左右添加20px内边距 */
+    color: saddlebrown;
+}
+
+.product-card {
+    background-color: wheat;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    display: flex; /* 使用flexbox横向排列截图 */
+    justify-content: left; /* 图片居中对齐 */
+    gap: 50px; /* 图片之间的间距 */
+    align-items: center
+}
+
+.product-card img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.product-card h3, .product-card p {
+    margin: 20px 0;
+    color: saddlebrown;
+    font-size: 50px;
+}
+
+/* 商品格子右下角的控制区域 */
+.product-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.add-to-cart,
+.decrease-in-grid,
+.increase-quantity,
+.decrease-quantity {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 5px; /* 添加按钮之间的间隔 */
+    margin-right: 5px; /* 添加按钮之间的间隔 */
+}
+
+.decrease-in-grid,
+.decrease-quantity {
+    background-color: #FF6347; /* 减号按钮为红色 */
+}
+
+.item-quantity-in-grid {
+    font-size: 18px;
+}
+
+/* 购物车图标 */
+.cart-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* 购物车浮窗样式 */
+.cart-modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal-content {
+    background-color: wheat;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
+.cart-modal-content h2, .cart-modal-content p{
+    color: saddlebrown;
+    font-size: 30px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 商品在购物车的样式 */
+.cart-items {
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.item-details p {
+    margin: 0;
+    color: saddlebrown;
+    font-size: 20px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.checkout-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* 帖子发布区域样式 */
+.forum-section {
+    background-image: url('./img/bg.jpg'); /* 设置背景图片 */
+    background-size: cover; /* 背景图片按比例覆盖整个区域 */
+    background-position: center; /* 图片居中显示 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    padding: 50px;
+    text-align: center;
+}
+
+#posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 发布帖子按钮样式 */
+.post-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* 浮窗样式 */
+.post-modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.post-modal-content {
+    background-color: wheat;
+    margin: 200px auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    height: 400px;
+    max-width: 1000px;
+    text-align: left;
+}
+
+input, textarea {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+textarea{
+    height: 150px;
+}
+
+/* 帖子样式 */
+.post {
+    background-color: #f9f9f9;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.post h3 {
+    margin-top: 0;
+    color: saddlebrown;
+}
+
+.post {
+    font-style: italic;
+    color: #555;
+    margin-top: 10px;
+}
+
+.post-modal-content button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* 登录页面 */
+
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 300px auto;
+    padding: 20px;
+    background-color: wheat;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 500px;
+}
+
+.login-container input{
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container h2{
+    color: saddlebrown;
+    font-size: 30px;
+}
+
+.login-container p{
+    color: saddlebrown;
+    font-size: 20px;
+}
+
+
+#login-message {
+    color: red;
+    margin-top: 10px;
+}
+
+h2 {
+    font-size: 3em; /* 设置标题的大小 */
+    font-weight: bold;
+    color: white; /* 设置字体颜色 */
+    text-align: center;
+    margin: 30px 0;
+}
+
+p {
+    font-size: 40px; /* 设置段落文本的大小 */
+    line-height: 1.6; /* 设置行间距，使得文本更易阅读 */
+    margin: 0 20px; /* 设置段落间的间距 */
+    text-align: center; /* 使段落文本对齐 */
+    color: white;
+}
+
+h3 {
+    font-size: 30px; /* 设置标题的大小 */
+    font-weight: bold;
+    color: saddlebrown; /* 设置字体颜色 */
+    text-align: center;
+    margin: 30px 0;
+}

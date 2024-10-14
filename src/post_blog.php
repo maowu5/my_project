@@ -1,0 +1,19 @@
+<?php
+session_start();
+include('db_connection.php');
+
+if (isset($_SESSION['user_id'])) {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $title = $data['title'];
+    $content = $data['content'];
+    $author = $_SESSION['username'];
+
+    // 插入帖子到数据库
+    $stmt = $pdo->prepare("INSERT INTO posts (title, content, author) VALUES (?, ?, ?)");
+    $stmt->execute([$title, $content, $author]);
+
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Not logged in']);
+}
+?>

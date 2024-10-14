@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stardew Valley-shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header>
+        <div class="nav-container">
+            <nav>
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="characters.html">Villagers</a></li>
+                    <li><a href="items.html">Items</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="forum.html">Blogs</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- 商品展示区 -->
+    <section class="shop-section">
+        <div class="shop-grid">
+            <!-- 商品1 -->
+            <div class="product-card" data-name="Tabletop" data-price="500" data-img="./img/shop1.jpg">
+                <img src="./img/shop1.jpg" alt="shop1">
+                <h3>Tabletop</h3>
+                <p>Price: 500</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+            <!-- 商品2 -->
+            <div class="product-card" data-name="Doll1" data-price="200" data-img="./img/shop2.jpg">
+                <img src="./img/shop2.jpg" alt="shop2">
+                <h3>Doll1</h3>
+                <p>Price：200</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+             <!-- 商品3 -->
+            <div class="product-card" data-name="Doll2" data-price="300" data-img="./img/shop3.jpg">
+                <img src="./img/shop3.jpg" alt="shop3">
+                <h3>Doll2</h3>
+                <p>Price：300</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+             <!-- 商品4 -->
+            <div class="product-card" data-name="Pendant1" data-price="50" data-img="./img/shop4.jpg">
+                <img src="./img/shop4.jpg" alt="shop4">
+                <h3>Pendant1</h3>
+                <p>Price：50</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+             <!-- 商品5 -->
+            <div class="product-card" data-name="Pendant2" data-price="100" data-img="./img/shop5.jpg">
+                <img src="./img/shop5.jpg" alt="shop5">
+                <h3>Pendant2</h3>
+                <p>Price：100</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+             <!-- 商品6 -->
+            <div class="product-card" data-name="Doll3" data-price="200" data-img="./img/shop6.jpg">
+                <img src="./img/shop6.jpg" alt="shop6">
+                <h3>Doll3</h3>
+                <p>Price：200</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+             <!-- 商品7 -->
+            <div class="product-card" data-name="Pencil case" data-price="400" data-img="./img/shop7.jpg">
+                <img src="./img/shop7.jpg" alt="shop7">
+                <h3>Pencil case</h3>
+                <p>Price：400</p>
+                <div class="product-controls">
+                    <button class="decrease-in-grid" style="display:none;">-</button>
+                    <span class="item-quantity-in-grid" style="display:none;">0</span>
+                    <button class="add-to-cart">+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 购物车图标 -->
+    <div class="cart-icon" onclick="openCart()">
+        🛒
+    </div>
+
+    <!-- 购物车浮窗 -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Shopping cart</h2>
+            <div class="cart-items"></div>
+            <div class="cart-footer">
+                <p>Total price: <span id="total-amount">0</span></p>
+                <button class="checkout-btn">Pay</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-social">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Steam</a>
+            </div>
+        <p><a href=" https://www.stardewvalley.net/">Reference: https://www.stardewvalley.net/</a></p>
+    </div>
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+</html>

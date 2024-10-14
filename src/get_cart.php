@@ -1,0 +1,17 @@
+<?php
+session_start();
+include('db_connection.php');
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // 查询用户购物车内容
+    $stmt = $pdo->prepare("SELECT p.name, p.price, c.quantity FROM cart c JOIN products p ON c.product_id = p.product_id WHERE c.user_id = ?");
+    $stmt->execute([$user_id]);
+    $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['success' => true, 'cartItems' => $cartItems]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Not logged in']);
+}
+?>
