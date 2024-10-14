@@ -12,13 +12,13 @@ error_reporting(E_ALL);        // 报告所有错误
 $data = json_decode(file_get_contents('php://input'), true);
 
 // 验证数据有效性
-if (!isset($data['username']) || !isset($data['rechargeAmount'])) {
+if (!isset($_SESSION['username'])) {
     echo json_encode(['success' => false, 'message' => 'Invalid input data.']);
     error_log('Invalid input data in update_balance.php');  // 记录错误日志
     exit;
 }
 
-$username = $data['username'];  // 从会话中获取用户名
+$username = $_SESSION['username'];  // 从会话中获取用户名
 $rechargeAmount = $data['rechargeAmount'];
 
 // 验证充值金额是否有效
