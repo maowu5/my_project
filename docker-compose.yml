@@ -24,7 +24,7 @@ services:
 
     myphp:
         build:
-            context: ./src/php
+            context: ./src
             dockerfile: dockerfile
         container_name: myphp
         expose:
