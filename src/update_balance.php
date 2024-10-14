@@ -2,6 +2,7 @@
 // 引入数据库连接文件
 include 'db_connection.php';
 
+session_start();
 // 启用错误日志记录
 ini_set('display_errors', 0);  // 关闭错误显示在页面
 ini_set('log_errors', 1);      // 启用错误日志
