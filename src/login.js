@@ -3,35 +3,6 @@ let isLoggedIn = false;
 let username = "";
 let balance = 0; 
 
-window.addEventListener('DOMContentLoaded', function() {
-    // 发起请求检查会话状态
-    fetch('/check_login.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.loggedin) {
-            isLoggedIn = true;  // 更新布尔变量
-            // 用户已登录，显示账户信息
-            document.getElementById('login-form-container').style.display = 'none';
-            document.getElementById('account-info').style.display = 'block';
-            document.getElementById('account-username').innerText = data.username;
-            document.getElementById('account-balance').innerText = parseFloat(data.balance).toFixed(2);
-        } else {
-            isLoggedIn = false;  // 如果未登录，设置为 false
-            // 用户未登录，显示登录表单
-            document.getElementById('login-form-container').style.display = 'block';
-            document.getElementById('account-info').style.display = 'none';
-        }
-    })
-    .catch(error => {
-        console.error('Error checking login status:', error);
-    });
-});
-
 // 处理用户登录与自动注册
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
