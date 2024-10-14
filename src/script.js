@@ -2,6 +2,16 @@ let cart = [];
 let isLoggedIn = false;
 let username = ""; // 当前登录的用户名
 
+// 打开购物车浮窗
+function openCart() {
+    document.getElementById('cart-modal').style.display = 'block';
+    updateCartDisplay();
+}
+
+// 关闭购物车浮窗
+function closeCart() {
+    document.getElementById('cart-modal').style.display = 'none';
+}
 // 检查登录状态
 function checkLoginStatus() {
     fetch('/check_login.php')
@@ -100,6 +110,39 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
         });
     });
 });
+
+function updateGridProductDisplay(productCard, productName) {
+    const productQuantity = cart.find(item => item.name === productName)?.quantity || 0;
+    const decreaseButton = productCard.querySelector('.decrease-in-grid');
+    const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
+
+    if (productQuantity > 0) {
+        decreaseButton.style.display = 'inline-block';
+        quantitySpan.style.display = 'inline-block';
+        quantitySpan.textContent = productQuantity;
+
+        // 如果还没有绑定事件监听器，则绑定一次
+        if (!decreaseButton.classList.contains('bound')) {
+            decreaseButton.classList.add('bound'); // 标记为已绑定事件
+            decreaseButton.addEventListener('click', function () {
+                const cartItem = cart.find(item => item.name === productName);
+
+                if (cartItem && cartItem.quantity > 0) {
+                    cartItem.quantity -= 1;
+                    if (cartItem.quantity === 0) {
+                        cart = cart.filter(item => item.name !== productName); // 移除商品
+                    }
+                }
+
+                updateCartDisplay(); // 更新购物车
+                updateGridProductDisplay(productCard, productName); // 更新商品格子中的数量显示
+            });
+        }
+    } else {
+        decreaseButton.style.display = 'none';
+        quantitySpan.style.display = 'none';
+    }
+}
 
 // 更新购物车显示
 function updateCartDisplay() {
