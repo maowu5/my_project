@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$db = 'stardew_web';
-$user = 'root';
-$pass = '';
+$host = 'mysql';
+$db = 'cloud_computing';
+$user = 'php';
+$pass = 'php'; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
