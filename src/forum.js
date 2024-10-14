@@ -1,8 +1,8 @@
 let isLoggedIn = false; // 登录状态
 let username = ""; // 当前登录用户的用户名
 
-// 检查登录状态
-function checkLoginStatus() {
+window.addEventListener('DOMContentLoaded', function() {
+    // 发起请求检查会话状态
     fetch('/check_login.php', {
         method: 'POST',
         headers: {
@@ -12,9 +12,11 @@ function checkLoginStatus() {
     .then(response => response.json())
     .then(data => {
         if (data.loggedin) {
+            // 用户已登录，显示账户信息
             isLoggedIn = true;
             username = data.username;
         } else {
+            // 用户未登录，显示登录表单
             isLoggedIn = false;
             username = "";
         }
@@ -22,7 +24,7 @@ function checkLoginStatus() {
     .catch(error => {
         console.error('Error checking login status:', error);
     });
-}
+});
 
 // 加载数据库中的帖子
 function loadPosts() {
@@ -60,7 +62,6 @@ window.onload = function () {
 
 // 打开发布帖子浮窗
 function openPostForm() {
-    checkLoginStatus()
     if (!isLoggedIn) {
         alert('Please login!');
         return;
@@ -76,7 +77,6 @@ function closePostForm() {
 // 发布帖子
 document.getElementById('post-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    checkLoginStatus()
     if (!isLoggedIn) {
         alert('Please login!');
         return;
