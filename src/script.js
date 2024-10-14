@@ -223,3 +223,42 @@ function updateCartItemInDatabase(productId, quantity) {
         console.error('error:', error);
     });
 }
+
+document.getElementById('checkout-btn').addEventListener('click', function () {
+    const totalAmount = parseFloat(document.getElementById('total-amount').textContent);
+
+    if (balance >= totalAmount) {
+        // 扣除余额
+        balance -= totalAmount;
+        alert('Purchase successful! Remaining balance: $' + balance.toFixed(2));
+
+        // 清空购物车
+        cart = [];
+        updateCartDisplay();
+
+        // 将余额和清空购物车信息保存到数据库
+        fetch('/checkout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,  // 用户名
+                newBalance: balance, // 更新后的余额
+                cartItems: []        // 清空购物车
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                alert('Failed to update balance and clear cart.');
+            }
+        })
+        .catch(error => {
+            console.error('Error during checkout:', error);
+        });
+
+    } else {
+        alert('Insufficient balance! Please recharge.');
+    }
+});
