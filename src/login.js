@@ -27,7 +27,11 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             alert('Login successful');
             isLoggedIn = true;
             username = data.username; // 保存用户名
-            document.getElementById('login-message').innerText = 'Welcome, ' + username;
+            // 显示账户信息，隐藏登录表单
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('account-info').style.display = 'block';
+            document.getElementById('account-username').innerText = username;
+            document.getElementById('account-balance').innerText = balance;
         } else {
             // 如果登录失败，自动注册
             alert('The user is not registered and is being automatically registered...');
