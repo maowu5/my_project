@@ -10,7 +10,6 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const usernameInput = document.getElementById('username').value;
     const passwordInput = document.getElementById('password').value;
 
-    // 发送登录请求到后端
     fetch('/login.php', {
         method: 'POST',
         headers: {
@@ -24,15 +23,18 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // 如果登录成功
+            // 登录成功
             alert('Login successful');
             isLoggedIn = true;
-            username = data.username; // 保存用户名
+            username = data.username;
+
             // 显示账户信息，隐藏登录表单
             document.getElementById('login-form-container').style.display = 'none';
             document.getElementById('account-info').style.display = 'block';
             document.getElementById('account-username').innerText = username;
-             fetch('/get_balance.php', {
+
+            // 从数据库获取余额并更新显示
+            fetch('/get_balance.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,8 +42,9 @@ document.getElementById('login-form').addEventListener('submit', function(event)
                 body: JSON.stringify({
                     username: username
                 })
-                .then(response => response.json())
-                .then(balanceData => {
+            })
+            .then(response => response.json())
+            .then(balanceData => {
                 if (balanceData.success) {
                     balance = balanceData.balance;  // 更新 balance 变量
                     document.getElementById('account-balance').innerText = balance.toFixed(2);
@@ -53,7 +56,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
                 console.error('Error fetching balance:', error);
             });
         } else {
-            // 如果登录失败，自动注册
+            // 登录失败，自动注册
             alert('The user is not registered and is being automatically registered...');
             autoRegister(usernameInput, passwordInput);
         }
