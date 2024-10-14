@@ -34,7 +34,15 @@
         </form>
         <p id="login-message"></p>
     </div>
-    
+
+    <!-- 账户信息显示（初始隐藏） -->
+    <div class="account-info-container" id="account-info" style="display:none;">
+        <h2>Account Information</h2>
+        <p>Welcome, <span id="account-username"></span></p>
+        <p>Balance: $<span id="account-balance">100</span></p>
+        <button id="recharge-btn">Recharge $100</button>
+        <button id="logout-btn">Logout</button>
+    </div>
     <script src="login.js"></script>
 
 </body>
