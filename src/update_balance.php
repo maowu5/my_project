@@ -23,7 +23,7 @@ $rechargeAmount = $data['rechargeAmount'];
 // 验证充值金额是否有效
 if (empty($username)) {
     echo json_encode(['success' => false, 'message' => 'Invalid recharge amount or username.']);
-    error_log('Invalid recharge amount or username in update_balance.php');  // 记录错误日志
+    error_log('Invalid recharge username in update_balance.php');  // 记录错误日志
     exit;
 }
 
