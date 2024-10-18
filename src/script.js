@@ -2,6 +2,7 @@ let cart = [];
 let isLoggedIn = false;
 let username = ""; // 当前登录的用户名
 let balance = 0; 
+let userId = ""; 
 
 window.addEventListener('DOMContentLoaded', function() {
     checkLoginStatus();  // 检查登录状态
@@ -82,6 +83,7 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                user_id: userId,
                 product_id: productId,
                 quantity: 1 // 添加一个商品
             })
@@ -196,6 +198,7 @@ function updateCartItemInDatabase(productId, quantity) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            user_id: userId,
             product_id: productId,
             quantity: quantity
         })
