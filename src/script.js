@@ -1,7 +1,34 @@
 let cart = [];
 let isLoggedIn = false;
 let username = ""; // 当前登录的用户名
+let balance = 0; 
 
+window.addEventListener('DOMContentLoaded', function() {
+    // 发起请求检查会话状态
+    fetch('/check_login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.loggedin) {
+            isLoggedIn = true;
+            username = data.username;
+            balance = data.balance;
+            loadCartFromDatabase();
+        } else {
+            isLoggedIn = false;
+            username = '';
+            balance = 0;
+            document.getElementById('login-message').innerText = 'Please Login';
+        }
+    })
+    .catch(error => {
+        console.error('Error checking login status:', error);
+    });
+});
 // 打开购物车浮窗
 function openCart() {
     document.getElementById('cart-modal').style.display = 'block';
@@ -26,28 +53,6 @@ function checkLoginStatus() {
             isLoggedIn = false;
             username = "";
             document.getElementById('login-message').innerText = 'Please Login';
-        }
-    })
-    .catch(error => {
-        console.error('error:', error);
-    });
-}
-
-// 页面加载时检查登录状态
-window.onload = function () {
-    checkLoginStatus();
-};
-
-// 从数据库加载购物车内容
-function loadCartFromDatabase() {
-    fetch('/get_cart.php')
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            cart = data.cartItems; // 将数据库中的购物车内容加载到cart数组中
-            updateCartDisplay();   // 更新前端的购物车显示
-        } else {
-            console.error('Fail');
         }
     })
     .catch(error => {
