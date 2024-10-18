@@ -53,7 +53,12 @@ function loadCartFromDatabase() {
             user_id: userId  // 根据登录的用户 ID 获取购物车内容
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('HTTP error, status = ' + response.status);
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('Cart Data from Server:', data); // 调试输出
         if (data.success) {
