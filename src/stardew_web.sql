@@ -59,3 +59,12 @@ INSERT INTO characters (name, description, image_url) VALUES
 ('Princess Iron Fan', 'A demoness married to the Bull Demon King, she possesses a magical fan that controls the wind and is an enemy of Sun Wukong.', './img/tie.jpg'),
 ('Hong Hai er', 'The son of the Bull Demon King and Princess Iron Fan, a formidable demon who causes trouble for the pilgrims.', './img/hong.jpg'),
 ('Jade Emperor', 'The ruler of Heaven, who originally imprisoned Sun Wukong after the monkey rebelled against the celestial order.', './img/Yu.jpg');
+
+INSERT INTO products (name, price, stock, image_url) VALUES
+('Tabletop', 500, 50, './img/shop1.jpg'),
+('Doll1', 200, 100, './img/shop2.jpg'),
+('Doll2', 300, 100, './img/shop3.jpg'),
+('Pendant1', 50, 200, './img/shop4.jpg'),
+('Pendant2', 100, 150, './img/shop5.jpg'),
+('Doll3', 200, 100, './img/shop6.jpg'),
+('Pencil case', 400, 80, './img/shop7.jpg');
