@@ -241,17 +241,14 @@ function updateCartDisplay() {
         });
 
         cartItemDiv.querySelector('.decrease-quantity').addEventListener('click', function () {
-            if (item.quantity > 1) {
-                item.quantity -= 1;
-            } else {
-                cart = cart.filter(cartItem => cartItem.id !== item.id); // 从购物车中移除商品
+             item.quantity -= 1;
+            updateCartItemInDatabase(item.id, item.quantity);
+            if (item.quantity < 1) {
+               cart = cart.filter(cartItem => cartItem.id !== item.id); // 从购物车中移除商品
             }
             updateCartDisplay();
             const productCard = document.querySelector(`.product-card[data-name="${item.name}"]`);
             updateGridProductDisplay(productCard, item.name);
-
-            // 更新数据库中的商品数量
-            updateCartItemInDatabase(item.id, item.quantity);
         });
 
         cartItemsContainer.appendChild(cartItemDiv);
