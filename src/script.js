@@ -1,14 +1,13 @@
 let cart = [];
 let isLoggedIn = false;
-let username = ""; // 当前登录的用户名
+let username = "";
 let balance = 0; 
 let userId = ""; 
 
 window.addEventListener('DOMContentLoaded', function() {
-    checkLoginStatus();  // 检查登录状态
+    checkLoginStatus();
 });
 
-// 检查登录状态
 function checkLoginStatus() {
     fetch('/check_login.php', {
         method: 'POST',
@@ -31,13 +30,12 @@ function checkLoginStatus() {
         console.error('Error checking login status:', error);
     });
 }
-// 打开购物车浮窗
+
 function openCart() {
     document.getElementById('cart-modal').style.display = 'block';
     updateCartDisplay();
 }
 
-// 关闭购物车浮窗
 function closeCart() {
     document.getElementById('cart-modal').style.display = 'none';
 }
@@ -63,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// 添加商品到购物车，并保存到数据库
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', function () {
         checkLoginStatus();
@@ -78,12 +75,10 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
         const productPrice = parseFloat(productCard.getAttribute('data-price'));
         const productImg = productCard.getAttribute('data-img');
 
-        // 查找是否购物车中已有该商品
         const existingItem = cart.find(item => item.id === productId);
         if (existingItem) {
-            existingItem.quantity += 1; // 如果存在，增加数量
+            existingItem.quantity += 1;
         } else {
-            // 如果不存在，添加新的商品到购物车
             cart.push({
                 id: productId,
                 name: productName,
@@ -93,11 +88,9 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
             });
         }
 
-        // 更新购物车显示
         updateCartDisplay();
         updateGridProductDisplay(productCard, productName);
 
-        // 将购物车数据保存到数据库
         fetch('/add_to_cart.php', {
             method: 'POST',
             headers: {
@@ -106,7 +99,7 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
             body: JSON.stringify({
                 user_id: userId,
                 product_id: productId,
-                quantity: 1 // 添加一个商品
+                quantity: 1
             })
         })
         .then(response => response.json())
@@ -134,17 +127,15 @@ function updateGridProductDisplay(productCard, productName) {
     }
 }
 
-// 更新购物车显示
 function updateCartDisplay() {
-    console.log('Current Cart:', cart);  // 调试输出购物车内容
+    console.log('Current Cart:', cart);
     const cartItemsContainer = document.querySelector('.cart-items');
-    cartItemsContainer.innerHTML = ''; // 清空购物车显示
+    cartItemsContainer.innerHTML = '';
 
     let totalAmount = 0;
 
-    // 遍历购物车中的商品，创建商品条目
     cart.forEach(item => {
-        totalAmount += item.price * item.quantity; // 计算总金额
+        totalAmount += item.price * item.quantity;
 
         const cartItemDiv = document.createElement('div');
         cartItemDiv.classList.add('cart-item');
@@ -165,8 +156,6 @@ function updateCartDisplay() {
             updateCartDisplay();
             const productCard = document.querySelector(`.product-card[data-name="${item.name}"]`);
             updateGridProductDisplay(productCard, item.name);
-
-            // 更新数据库中的商品数量
             updateCartItemInDatabase(item.id, item.quantity);
         });
 
@@ -174,7 +163,7 @@ function updateCartDisplay() {
              item.quantity -= 1;
             updateCartItemInDatabase(item.id, item.quantity);
             if (item.quantity < 1) {
-               cart = cart.filter(cartItem => cartItem.id !== item.id); // 从购物车中移除商品
+               cart = cart.filter(cartItem => cartItem.id !== item.id); 
             }
             updateCartDisplay();
             const productCard = document.querySelector(`.product-card[data-name="${item.name}"]`);
@@ -183,12 +172,10 @@ function updateCartDisplay() {
 
         cartItemsContainer.appendChild(cartItemDiv);
     });
-
-    // 更新总金额
     document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
 }
 
-// 更新购物车中的商品数量到数据库
+
 function updateCartItemInDatabase(productId, quantity) {
     fetch('/update_cart.php', {
         method: 'POST',
@@ -212,7 +199,6 @@ function updateCartItemInDatabase(productId, quantity) {
     });
 }
 
-// 页面加载时获取用户的余额
 document.addEventListener('DOMContentLoaded', function () {
     fetch('/get_balance.php', {
         method: 'POST',
@@ -220,14 +206,14 @@ document.addEventListener('DOMContentLoaded', function () {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: username  // 用户名，可能在登录时已经设置
+            username: username
         })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
             balance = data.balance;
-            document.getElementById('account-balance').textContent = balance.toFixed(2);  // 更新页面余额显示
+            document.getElementById('account-balance').textContent = balance.toFixed(2);
         } else {
             alert('Failed to fetch balance: ' + data.message);
         }
@@ -237,29 +223,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// 结算逻辑
 document.getElementById('checkout-btn').addEventListener('click', function () {
     const totalAmount = parseFloat(document.getElementById('total-amount').textContent);
 
     if (balance >= totalAmount) {
-        // 扣除余额
         balance -= totalAmount;
         alert('Purchase successful! Remaining balance: $' + balance.toFixed(2));
-
-        // 清空购物车
         cart = [];
         updateCartDisplay();
 
-        // 将余额和清空购物车信息保存到数据库
         fetch('/checkout.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: username,  // 用户名
-                newBalance: balance, // 更新后的余额
-                cartItems: []        // 清空购物车
+                username: username, 
+                newBalance: balance, 
+                cartItems: []  
             })
         })
         .then(response => response.json())
