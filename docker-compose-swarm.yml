@@ -19,7 +19,7 @@ services:
       - mynet
 
   myphp:
-    image: php:8.2-fpm
+    image: myphp:latest
     volumes:
       - ./src:/var/www/html
     depends_on:
