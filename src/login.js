@@ -1,10 +1,8 @@
-// 初始化登录状态
 let isLoggedIn = false;
 let username = "";
 let balance = 0; 
 
 window.addEventListener('DOMContentLoaded', function() {
-    // 发起请求检查会话状态
     fetch('/check_login.php', {
         method: 'POST',
         headers: {
@@ -14,13 +12,11 @@ window.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         if (data.loggedin) {
-            // 用户已登录，显示账户信息
             document.getElementById('login-form-container').style.display = 'none';
             document.getElementById('account-info').style.display = 'block';
             document.getElementById('account-username').innerText = data.username;
             document.getElementById('account-balance').innerText = parseFloat(data.balance).toFixed(2);
         } else {
-            // 用户未登录，显示登录表单
             document.getElementById('login-form-container').style.display = 'block';
             document.getElementById('account-info').style.display = 'none';
         }
@@ -30,7 +26,6 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// 处理用户登录与自动注册
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -50,17 +45,14 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // 登录成功
             alert('Login successful');
             isLoggedIn = true;
             username = data.username;
 
-            // 显示账户信息，隐藏登录表单
             document.getElementById('login-form-container').style.display = 'none';
             document.getElementById('account-info').style.display = 'block';
             document.getElementById('account-username').innerText = username;
 
-            // 从数据库获取余额并更新显示
             fetch('/get_balance.php', {
                 method: 'POST',
                 headers: {
@@ -73,7 +65,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             .then(response => response.json())
             .then(balanceData => {
                 if (balanceData.success) {
-                    balance = parseFloat(balanceData.balance);  // 更新 balance 变量
+                    balance = parseFloat(balanceData.balance);
                     document.getElementById('account-balance').innerText = balance.toFixed(2);
                 } else {
                     alert('Failed to retrieve balance.');
@@ -83,7 +75,6 @@ document.getElementById('login-form').addEventListener('submit', function(event)
                 console.error('Error fetching balance:', error);
             });
         } else {
-            // 登录失败，自动注册
             alert('The user is not registered and is being automatically registered...');
             autoRegister(usernameInput, passwordInput);
         }
@@ -93,7 +84,6 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     });
 });
 
-// 自动注册函数
 function autoRegister(username, password) {
     fetch('/register.php', {
         method: 'POST',
@@ -119,29 +109,28 @@ function autoRegister(username, password) {
 }
 
 document.getElementById('recharge-btn').addEventListener('click', function() {
-    console.log('Recharge button clicked');  // 调试输出，检查是否触发点击事件
+    console.log('Recharge button clicked'); 
     fetch('/update_balance.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: username,  // 当前用户名
-            rechargeAmount: 100  // 充值金额为100
+            username: username, 
+            rechargeAmount: 100
         })
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Update Balance Response:', data);  // 检查返回的响应
+        console.log('Update Balance Response:', data);
         if (data.success) {
-            // 充值成功后从数据库获取更新后的余额
             fetch('/get_balance.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: username  // 当前用户名
+                    username: username
                 })
             })
             .then(response => response.json())
@@ -168,14 +157,12 @@ document.getElementById('recharge-btn').addEventListener('click', function() {
 
 
 
-// 退出登录功能
 document.getElementById('logout-btn').addEventListener('click', function() {
-    window.location.href = '/logout.php';  // 调用注销功能
+    window.location.href = '/logout.php'; 
     isLoggedIn = false;
     username = "";
-    balance = 100;  // 退出后重置余额
+    balance = 100;
 
-    // 重新显示登录表单，隐藏账户信息
     document.getElementById('login-form-container').style.display = 'block';
     document.getElementById('account-info').style.display = 'none';
     alert('You have logged out.');
