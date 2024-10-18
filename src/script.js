@@ -88,6 +88,14 @@ function updateProductDisplay() {
             decreaseButton.style.display = 'inline-block';
             quantitySpan.style.display = 'inline-block';
 
+            if (decreaseButton) {
+                console.log('Found the decrease button!');
+                decreaseButton.addEventListener('click', function() {
+                    console.log('1');  // 当按钮被点击时，打印 "1"
+            });
+            } else {
+                console.error('Button not found.');
+            }
             // 增加减少数量的事件绑定
             decreaseButton.addEventListener('click', function () {
                 console.log('1');
