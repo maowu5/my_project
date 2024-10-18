@@ -24,6 +24,7 @@ function checkLoginStatus() {
             balance = data.balance;
             userId = data.user_id;
             updateCartDisplay() // 如果登录了，加载购物车数据
+            updateGridProductDisplay(productCard, productName);
         } else {
             isLoggedIn = false;
         }
