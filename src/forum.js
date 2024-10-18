@@ -1,8 +1,7 @@
-let isLoggedIn = false; // 登录状态
-let username = ""; // 当前登录用户的用户名
+let isLoggedIn = false;
+let username = "";
 
 window.addEventListener('DOMContentLoaded', function() {
-    // 发起请求检查会话状态
     fetch('/check_login.php', {
         method: 'POST',
         headers: {
@@ -12,11 +11,9 @@ window.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         if (data.loggedin) {
-            // 用户已登录，显示账户信息
             isLoggedIn = true;
             username = data.username;
         } else {
-            // 用户未登录，显示登录表单
             isLoggedIn = false;
             username = "";
         }
@@ -26,16 +23,14 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// 加载数据库中的帖子
 function loadPosts() {
-    fetch('/get_posts.php')  // 后端接口，用于获取帖子数据
+    fetch('/get_posts.php')
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 const postsContainer = document.getElementById('posts-container');
-                postsContainer.innerHTML = '';  // 清空容器中的旧内容
-
-                // 遍历帖子并添加到容器中
+                postsContainer.innerHTML = '';
+                
                 data.posts.forEach(post => {
                     const postHTML = `
                         <div class="post">
@@ -55,12 +50,10 @@ function loadPosts() {
         });
 }
 
-// 页面加载时检查登录状态并加载帖子
 window.onload = function () {
-    loadPosts(); // 加载已有帖子
+    loadPosts();
 };
 
-// 打开发布帖子浮窗
 function openPostForm() {
     if (!isLoggedIn) {
         alert('Please login!');
@@ -69,12 +62,10 @@ function openPostForm() {
     document.getElementById('post-modal').style.display = 'block';
 }
 
-// 关闭发布帖子浮窗
 function closePostForm() {
     document.getElementById('post-modal').style.display = 'none';
 }
 
-// 发布帖子
 document.getElementById('post-form').addEventListener('submit', function(event) {
     event.preventDefault();
     if (!isLoggedIn) {
@@ -85,7 +76,6 @@ document.getElementById('post-form').addEventListener('submit', function(event) 
     const title = document.getElementById('post-title').value;
     const content = document.getElementById('post-content').value;
 
-    // 发送帖子数据到后端保存到数据库
     fetch('/post_blog.php', {
         method: 'POST',
         headers: {
@@ -94,13 +84,12 @@ document.getElementById('post-form').addEventListener('submit', function(event) 
         body: JSON.stringify({
             title: title,
             content: content,
-            author: username // 当前登录的用户
+            author: username
         })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // 生成并添加帖子HTML到页面
             const postHTML = `
                 <div class="post">
                     <h3>${title}</h3>
@@ -110,8 +99,8 @@ document.getElementById('post-form').addEventListener('submit', function(event) 
             `;
 
             document.getElementById('posts-container').insertAdjacentHTML('beforeend', postHTML);
-            document.getElementById('post-form').reset(); // 重置表单
-            closePostForm(); // 关闭发帖浮窗
+            document.getElementById('post-form').reset();
+            closePostForm();
         } else {
             alert('Fail！');
         }
