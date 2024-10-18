@@ -43,6 +43,39 @@ function closeCart() {
     document.getElementById('cart-modal').style.display = 'none';
 }
 
+function loadCartFromDatabase() {
+    fetch('/get_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: userId  // 根据登录的用户 ID 获取购物车内容
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            cart = data.cartItems; // 将购物车内容加载到 cart 数组中
+
+            // 遍历每个商品，并调用 updateGridProductDisplay 来更新 UI
+            document.querySelectorAll('.product-card').forEach(productCard => {
+                const productId = productCard.getAttribute('data-id');
+                const cartItem = cart.find(item => item.product_id === productId);
+
+                if (cartItem) {
+                    updateGridProductDisplay(productCard, cartItem.name);
+                }
+            });
+        } else {
+            console.error('Failed to load cart:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error loading cart:', error);
+    });
+}
+
 // 添加商品到购物车，并保存到数据库
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', function () {
