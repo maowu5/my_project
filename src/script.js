@@ -76,7 +76,7 @@ function loadCartFromDatabase() {
 
 function updateProductDisplay() {
     document.querySelectorAll('.product-card').forEach(productCard => {
-       const productId = productCard.getAttribute('data-id');
+        const productId = productCard.getAttribute('data-id');
         const cartItem = cart.find(item => item.product_id === parseInt(productId));
 
         if (cartItem) {
@@ -88,6 +88,14 @@ function updateProductDisplay() {
             decreaseButton.style.display = 'inline-block';
             quantitySpan.style.display = 'inline-block';
 
+            if (decreaseButton) {
+                console.log('Found the decrease button!');
+                decreaseButton.addEventListener('click', function() {
+                console.log('1');  // 当按钮被点击时，打印 "1"
+                });
+            } else {
+                console.error('Button not found.');
+            }
             if (decreaseButton) {
                 console.log('Found the decrease button!');
                 decreaseButton.addEventListener('click', function() {
