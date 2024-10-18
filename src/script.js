@@ -43,63 +43,6 @@ function closeCart() {
     document.getElementById('cart-modal').style.display = 'none';
 }
 
-function loadCartFromDatabase() {
-    fetch('/get_cart.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            user_id: userId  // 根据登录的用户 ID 获取购物车内容
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('HTTP error, status = ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Cart Data from Server:', data); // 调试输出
-        if (data.success) {
-            cart = data.cartItems; // 将购物车内容加载到 cart 数组中
-            updateCartDisplay();   // 更新购物车显示
-            updateProductDisplay(); // 更新商品显示
-        } else {
-            console.error('Failed to load cart:', data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error loading cart:', error);
-    });
-}
-
-function updateProductDisplay() {
-    document.querySelectorAll('.product-card').forEach(productCard => {
-        const productId = productCard.getAttribute('data-id');
-        const cartItem = cart.find(item => item.product_id === parseInt(productId));
-
-        if (cartItem) {
-            // 在商品卡片中显示已购买数量
-            const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
-
-            quantitySpan.textContent = cartItem.quantity;
-            quantitySpan.style.display = 'inline-block';
-
-            const addButton = productCard.querySelector('.add-to-cart');
-            addButton.addEventListener('click', function () {
-                cartItem.quantity += 1; // 增加数量
-                updateCartDisplay(); // 更新购物车显示
-                updateProductDisplay(); // 更新商品卡片显示
-                updateCartItemInDatabase(productId, cartItem.quantity); // 更新数据库
-            });
-        } else {
-            // 如果购物车中没有此商品，隐藏数量显示
-            const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
-            quantitySpan.style.display = 'none';
-        }
-    });
-}
 
 // 添加商品到购物车，并保存到数据库
 document.querySelectorAll('.add-to-cart').forEach(button => {
