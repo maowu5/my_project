@@ -23,7 +23,6 @@ function checkLoginStatus() {
             username = data.username;
             balance = data.balance;
             userId = data.user_id;
-            loadCartFromDatabase(); // 如果登录了，加载购物车数据
         } else {
             isLoggedIn = false;
         }
@@ -42,6 +41,26 @@ function openCart() {
 function closeCart() {
     document.getElementById('cart-modal').style.display = 'none';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/clear_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Cart cleared');
+        } else {
+            console.error('Failed to clear cart:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error clearing cart:', error);
+    });
+});
 
 
 // 添加商品到购物车，并保存到数据库
