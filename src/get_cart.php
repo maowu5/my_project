@@ -20,4 +20,6 @@ if (isset($_SESSION['user_id'])) {
 } else {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
 }
+error_log("User ID: $user_id");
+error_log("Cart Items: " . print_r($cartItems, true));
 ?>
