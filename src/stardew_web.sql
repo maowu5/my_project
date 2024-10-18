@@ -1,4 +1,3 @@
--- 创建 users 表，用于存储用户信息
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -7,7 +6,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 创建 cart 表，用于存储购物车信息
 CREATE TABLE cart (
     cart_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -17,7 +15,6 @@ CREATE TABLE cart (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
--- 创建 products 表，用于存储商品信息
 CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -27,7 +24,6 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 创建 posts 表，用于存储博客帖子
 CREATE TABLE posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
