@@ -19,6 +19,7 @@ if ($user && password_verify($password, $user['password_hash'])) {
     $_SESSION['loggedin'] = true;
     $_SESSION['username'] = $username;
     $_SESSION['balance'] = $user['balance'];  // 保存用户的余额
+    $_SESSION['user_id'] = $user['user_id']; 
     
     echo json_encode(['success' => true, 'username' => $username]);
 } else {
