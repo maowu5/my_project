@@ -135,7 +135,7 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
         } else {
             // 如果不存在，添加新的商品到购物车
             cart.push({
-                id: productId,
+                product_id: productId,
                 name: productName,
                 price: productPrice,
                 img: productImg,
@@ -230,7 +230,6 @@ function updateCartDisplay() {
                 <button class="increase-quantity">+</button>
             </div>
         `;
-            cartItemsContainer.appendChild(cartItemDiv);
             cartItemDiv.querySelector('.increase-quantity').addEventListener('click', function () {
             item.quantity += 1;
             updateCartDisplay();
