@@ -90,14 +90,13 @@ function updateProductDisplay() {
 
             // 增加减少数量的事件绑定
             decreaseButton.addEventListener('click', function () {
-                if (cartItem.quantity > 1) {
-                    cartItem.quantity -= 1;
-                } else {
-                    cart = cart.filter(item => item.product_id !== parseInt(productId)); // 从购物车中移除该商品
-                }
+                cartItem.quantity -= 1;
                 updateCartDisplay(); // 更新购物车显示
                 updateProductDisplay(); // 更新商品卡片显示
                 updateCartItemInDatabase(productId, cartItem.quantity); // 更新数据库
+                if (cartItem.quantity < 1) {
+                    cart = cart.filter(item => item.product_id !== parseInt(productId)); // 从购物车中移除该商品
+                }
             });
 
             const addButton = productCard.querySelector('.add-to-cart');
