@@ -71,8 +71,8 @@ function loadCartFromDatabase() {
 
 function updateProductDisplay() {
     document.querySelectorAll('.product-card').forEach(productCard => {
-        const productId = productCard.getAttribute('data-id');
-        const cartItem = cart.find(item => item.product_id === productId);
+       const productId = productCard.getAttribute('data-id');
+        const cartItem = cart.find(item => item.product_id === parseInt(productId));
 
         if (cartItem) {
             // 在商品卡片中显示已购买数量
@@ -82,6 +82,26 @@ function updateProductDisplay() {
             quantitySpan.textContent = cartItem.quantity;
             decreaseButton.style.display = 'inline-block';
             quantitySpan.style.display = 'inline-block';
+
+            // 增加减少数量的事件绑定
+            decreaseButton.addEventListener('click', function () {
+                if (cartItem.quantity > 1) {
+                    cartItem.quantity -= 1;
+                } else {
+                    cart = cart.filter(item => item.product_id !== parseInt(productId)); // 从购物车中移除该商品
+                }
+                updateCartDisplay(); // 更新购物车显示
+                updateProductDisplay(); // 更新商品卡片显示
+                updateCartItemInDatabase(productId, cartItem.quantity); // 更新数据库
+            });
+
+            const addButton = productCard.querySelector('.add-to-cart');
+            addButton.addEventListener('click', function () {
+                cartItem.quantity += 1; // 增加数量
+                updateCartDisplay(); // 更新购物车显示
+                updateProductDisplay(); // 更新商品卡片显示
+                updateCartItemInDatabase(productId, cartItem.quantity); // 更新数据库
+            });
         } else {
             // 如果购物车中没有此商品，隐藏数量显示
             const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
