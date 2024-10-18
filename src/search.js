@@ -1,3 +1,25 @@
+let isLoggedIn = false;
+let username = "";
+let balance = 0; 
+window.addEventListener('DOMContentLoaded', function() {
+    // 发起请求检查会话状态
+    fetch('/check_login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.loggedin) {
+           console.error('Please Login');
+        }
+    })
+    .catch(error => {
+        console.error('Error checking login status:', error);
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'search.php', true);  // 初次加载时，不带任何查询参数
