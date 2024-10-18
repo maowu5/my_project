@@ -135,7 +135,7 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
         } else {
             // 如果不存在，添加新的商品到购物车
             cart.push({
-                product_id: productId,
+                id: productId,
                 name: productName,
                 price: productPrice,
                 img: productImg,
