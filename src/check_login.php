@@ -5,6 +5,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // 用户已登录，返回用户信息
     $response['loggedin'] = true;
     $response['username'] = $_SESSION['username'];
+    $response['user_id'] = $_SESSION['user_id']; 
     // 确保从数据库或会话中获取余额
     include 'db_connection.php';
     $sql = "SELECT balance FROM users WHERE username = :username";
