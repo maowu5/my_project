@@ -178,15 +178,15 @@ function updateGridProductDisplay(productCard, productName) {
             decreaseButton.addEventListener('click', function () {
                 const cartItem = cart.find(item => item.name === productName);
 
-                if (cartItem && cartItem.quantity > 0) {
+                if (cartItem) {
                     cartItem.quantity -= 1;
-                    if (cartItem.quantity === 0) {
-                        cart = cart.filter(item => item.name !== productName); // 移除商品
-                    }
                 }
 
                 updateCartDisplay(); // 更新购物车
                 updateGridProductDisplay(productCard, productName); // 更新商品格子中的数量显示
+                if (cartItem.quantity < 1) {
+                        cart = cart.filter(item => item.name !== productName); // 移除商品
+                    }
             });
         }
     } else {
@@ -231,7 +231,7 @@ function updateCartDisplay() {
             updateCartItemInDatabase(item.id, item.quantity);
         });
 
-        cartItemDiv.querySelector('.decrease-quantity').addEventListener('click', function () {
+            cartItemDiv.querySelector('.decrease-quantity').addEventListener('click', function () {
              item.quantity -= 1;
             updateCartItemInDatabase(item.id, item.quantity);
             if (item.quantity < 1) {
