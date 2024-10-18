@@ -37,6 +37,13 @@ services:
         restart: always
         networks:
             - mynet
+        deploy:
+          replicas: 3
+          update_config:
+            parallelism: 2
+            delay: 10s
+          restart_policy:
+            condition: on-failure
 
     mynginx:
         image: nginx:latest
@@ -51,6 +58,13 @@ services:
         restart: always
         networks:
             - mynet
+        deploy:
+          replicas: 2
+          update_config:
+            parallelism: 1
+            delay: 10s
+          restart_policy:
+            condition: on-failure
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
