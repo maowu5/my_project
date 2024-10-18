@@ -8,7 +8,6 @@ if (isset($_SESSION['username'])) {
     $content = $data['content'];
     $author = $_SESSION['username'];
 
-    // 插入帖子到数据库
     $stmt = $pdo->prepare("INSERT INTO posts (title, content, author) VALUES (?, ?, ?)");
     $stmt->execute([$title, $content, $author]);
 
