@@ -21,11 +21,9 @@ function checkLoginStatus() {
             isLoggedIn = true;
             username = data.username;
             balance = data.balance;
-            document.getElementById('login-message').innerText = `Welcome, ${username}`;
             loadCartFromDatabase(); // 如果登录了，加载购物车数据
         } else {
             isLoggedIn = false;
-            document.getElementById('login-message').innerText = 'Please Login';
         }
     })
     .catch(error => {
