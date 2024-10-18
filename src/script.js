@@ -55,6 +55,7 @@ function loadCartFromDatabase() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log('Cart Data from Server:', data); // 调试输出
         if (data.success) {
             cart = data.cartItems; // 将购物车内容加载到 cart 数组中
             updateCartDisplay();   // 更新购物车显示
@@ -71,7 +72,7 @@ function loadCartFromDatabase() {
 function updateProductDisplay() {
     document.querySelectorAll('.product-card').forEach(productCard => {
         const productId = productCard.getAttribute('data-id');
-        const cartItem = cart.find(item => item.id === productId);
+        const cartItem = cart.find(item => item.product_id === productId);
 
         if (cartItem) {
             // 在商品卡片中显示已购买数量
@@ -185,6 +186,7 @@ function updateGridProductDisplay(productCard, productName) {
 
 // 更新购物车显示
 function updateCartDisplay() {
+    console.log('Current Cart:', cart);  // 调试输出购物车内容
     const cartItemsContainer = document.querySelector('.cart-items');
     cartItemsContainer.innerHTML = ''; // 清空购物车显示
 
@@ -208,8 +210,8 @@ function updateCartDisplay() {
                 <button class="increase-quantity">+</button>
             </div>
         `;
-
-        cartItemDiv.querySelector('.increase-quantity').addEventListener('click', function () {
+            cartItemsContainer.appendChild(cartItemDiv);
+            cartItemDiv.querySelector('.increase-quantity').addEventListener('click', function () {
             item.quantity += 1;
             updateCartDisplay();
             const productCard = document.querySelector(`.product-card[data-name="${item.name}"]`);
