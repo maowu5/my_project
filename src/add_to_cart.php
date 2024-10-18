@@ -27,4 +27,5 @@ if (isset($_SESSION['user_id'])) {
 } else {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
 }
+error_log("User ID: $user_id, Product ID: $product_id, Quantity: $quantity");
 ?>
