@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('db_connection.php');
 
 // 检查是否有搜索请求
