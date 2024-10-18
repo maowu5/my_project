@@ -33,7 +33,7 @@ services:
         condition: on-failure
 
   mynginx:
-    image: mynginx:latest
+    image: nginx:latest
     ports:
       - "8080:80"
     volumes:
