@@ -82,39 +82,9 @@ function updateProductDisplay() {
         if (cartItem) {
             // 在商品卡片中显示已购买数量
             const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
-            const decreaseButton = productCard.querySelector('.decrease-in-grid');
 
             quantitySpan.textContent = cartItem.quantity;
-            decreaseButton.style.display = 'inline-block';
             quantitySpan.style.display = 'inline-block';
-
-            if (decreaseButton) {
-                console.log('Found the decrease button!');
-                decreaseButton.addEventListener('click', function() {
-                console.log('1');  // 当按钮被点击时，打印 "1"
-                });
-            } else {
-                console.error('Button not found.');
-            }
-            if (decreaseButton) {
-                console.log('Found the decrease button!');
-                decreaseButton.addEventListener('click', function() {
-                    console.log('1');  // 当按钮被点击时，打印 "1"
-            });
-            } else {
-                console.error('Button not found.');
-            }
-            // 增加减少数量的事件绑定
-            decreaseButton.addEventListener('click', function () {
-                console.log('1');
-                cartItem.quantity -= 1;
-                updateCartDisplay(); // 更新购物车显示
-                updateProductDisplay(); // 更新商品卡片显示
-                updateCartItemInDatabase(productId, cartItem.quantity); // 更新数据库
-                if (cartItem.quantity < 1) {
-                    cart = cart.filter(item => item.product_id !== parseInt(productId)); // 从购物车中移除该商品
-                }
-            });
 
             const addButton = productCard.querySelector('.add-to-cart');
             addButton.addEventListener('click', function () {
