@@ -9,6 +9,9 @@ RUN pecl install igbinary redis \
 WORKDIR /var/www/html
 COPY . /var/www/html
 
+RUN echo "session.save_handler = redis" >> /usr/local/etc/php/conf.d/session.ini \
+    && echo "session.save_path = \"tcp://myredis:6379\"" >> /usr/local/etc/php/conf.d/session.ini
+
 EXPOSE 9000
 
 CMD ["php-fpm"]
