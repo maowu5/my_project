@@ -57,22 +57,38 @@ function loadCartFromDatabase() {
     .then(data => {
         if (data.success) {
             cart = data.cartItems; // 将购物车内容加载到 cart 数组中
-
-            // 遍历每个商品，并调用 updateGridProductDisplay 来更新 UI
-            document.querySelectorAll('.product-card').forEach(productCard => {
-                const productId = productCard.getAttribute('data-id');
-                const cartItem = cart.find(item => item.product_id === productId);
-
-                if (cartItem) {
-                    updateGridProductDisplay(productCard, cartItem.name);
-                }
-            });
+            updateCartDisplay();   // 更新购物车显示
+            updateProductDisplay(); // 更新商品显示
         } else {
             console.error('Failed to load cart:', data.message);
         }
     })
     .catch(error => {
         console.error('Error loading cart:', error);
+    });
+}
+
+function updateProductDisplay() {
+    document.querySelectorAll('.product-card').forEach(productCard => {
+        const productId = productCard.getAttribute('data-id');
+        const cartItem = cart.find(item => item.id === productId);
+
+        if (cartItem) {
+            // 在商品卡片中显示已购买数量
+            const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
+            const decreaseButton = productCard.querySelector('.decrease-in-grid');
+
+            quantitySpan.textContent = cartItem.quantity;
+            decreaseButton.style.display = 'inline-block';
+            quantitySpan.style.display = 'inline-block';
+        } else {
+            // 如果购物车中没有此商品，隐藏数量显示
+            const quantitySpan = productCard.querySelector('.item-quantity-in-grid');
+            const decreaseButton = productCard.querySelector('.decrease-in-grid');
+
+            decreaseButton.style.display = 'none';
+            quantitySpan.style.display = 'none';
+        }
     });
 }
 
