@@ -167,7 +167,7 @@ function updateGridProductDisplay(productCard, productName) {
         quantitySpan.style.display = 'inline-block';
         quantitySpan.textContent = productQuantity;
     } else {
-        decreaseButton.style.display = 'none';
+        quantitySpan.textContent = productQuantity;
         quantitySpan.style.display = 'none';
     }
 }
