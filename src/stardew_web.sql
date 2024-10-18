@@ -42,16 +42,8 @@ CREATE TABLE characters (
 );
 
 INSERT INTO posts (title, content, author) VALUES
-('Stardew Valley 1.6 Mobile & Console Release date', 'Hello all, The console and mobile ports of the 1.6 update will be released on November 4th, 2024.
-Thank you for your patience. The console and mobile ports will release at version 1.6.9, which will also come to PC around that time.
-I’m looking forward to having 1.6 fully released on all platforms. Then I would like to finish Haunted Chocolatier next. Thank you', 'Ape'),
-('The Stardew Valley Cookbook is now available!', 'The Stardew Valley Cookbook is now available, wherever books are sold!
-Featuring over 50 recipes from Stardew Valley, with photos, appearances from Stardew Valley’s characters, and delightful illustrations… this cookbook will make a great addition to your shelf.
-Here are a couple of preview recipes, if you’d like try them out before getting the book:
-Nerdist (Strange Bun)
-Mashable (Seafoam Pudding)
-I would like to thank Kari Fry (illustrations), Ryan Novak (writing), Susan Vu (recipes), and everyone at Penguin Random House for helping make this a reality.
-I hope you enjoy the book, and I am looking forward to seeing your Stardew Valley cooking creations come to life!', 'Ape');
+('The Legendary Journey of Sun Wukong', 'In Journey to the West, Sun Wukong, also known as the Monkey King, is one of the most beloved characters in Chinese literature. Born from a stone and gifted with incredible strength and abilities, Wukong embarks on a journey of self-discovery. His mischievous nature and rebellious spirit lead him into trouble, but through discipline and wisdom, he evolves into a loyal protector of the monk Xuanzang. His transformation from a chaotic figure to a hero is what makes him such a compelling and timeless character.', 'User1'),
+('Xuanzang’s Quest for Enlightenment', 'At the heart of Journey to the West is the monk Xuanzang, whose pilgrimage to retrieve sacred Buddhist scriptures symbolizes the path to spiritual enlightenment. Unlike his companions, Xuanzang has no special powers but is guided by his unwavering faith and commitment to his mission. His journey is filled with obstacles, from fearsome demons to internal doubts, but his purity of heart and dedication inspire those around him. Xuanzang's character embodies the virtues of patience, compassion, and humility.', 'User2');
 
 INSERT INTO characters (name, description, image_url) VALUES
 ('Sun Wukong', 'A mischievous and powerful monkey who becomes the leader of the pilgrims, known for his strength and ability to transform.', './img/Sun.jpg')
