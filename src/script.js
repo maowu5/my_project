@@ -90,6 +90,7 @@ function updateProductDisplay() {
 
             // 增加减少数量的事件绑定
             decreaseButton.addEventListener('click', function () {
+                console.log('1');
                 cartItem.quantity -= 1;
                 updateCartDisplay(); // 更新购物车显示
                 updateProductDisplay(); // 更新商品卡片显示
