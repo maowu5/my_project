@@ -3,11 +3,6 @@ include('db_connection.php');
 
 session_start();  // 开启 session
 
-// 检查用户是否已登录
-if (!isset($_SESSION['user_id'])) {
-    // 如果用户未登录，显示“请登录”
-    echo "<p>Please log in to view this content.</p>";
-}eles{
     // 检查是否有搜索请求
 if (isset($_GET['query']) && !empty($_GET['query'])) {
     // 获取用户输入的搜索词
@@ -21,7 +16,6 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
 }
 
 $results = $stmt->fetchAll();
-}
 
 
 // 输出角色卡片
