@@ -4,7 +4,11 @@ let username = ""; // 当前登录的用户名
 let balance = 0; 
 
 window.addEventListener('DOMContentLoaded', function() {
-    // 发起请求检查会话状态
+    checkLoginStatus();  // 检查登录状态
+});
+
+// 检查登录状态
+function checkLoginStatus() {
     fetch('/check_login.php', {
         method: 'POST',
         headers: {
@@ -17,18 +21,17 @@ window.addEventListener('DOMContentLoaded', function() {
             isLoggedIn = true;
             username = data.username;
             balance = data.balance;
-            loadCartFromDatabase();
+            document.getElementById('login-message').innerText = `Welcome, ${username}`;
+            loadCartFromDatabase(); // 如果登录了，加载购物车数据
         } else {
             isLoggedIn = false;
-            username = '';
-            balance = 0;
             document.getElementById('login-message').innerText = 'Please Login';
         }
     })
     .catch(error => {
         console.error('Error checking login status:', error);
     });
-});
+}
 // 打开购物车浮窗
 function openCart() {
     document.getElementById('cart-modal').style.display = 'block';
@@ -39,30 +42,11 @@ function openCart() {
 function closeCart() {
     document.getElementById('cart-modal').style.display = 'none';
 }
-// 检查登录状态
-function checkLoginStatus() {
-    fetch('/check_login.php')
-    .then(response => response.json())
-    .then(data => {
-        if (data.isLoggedIn) {
-            isLoggedIn = true;
-            username = data.username;
-            document.getElementById('login-message').innerText = `Welcome, ${username}`;
-            loadCartFromDatabase(); // 登录后加载购物车内容
-        } else {
-            isLoggedIn = false;
-            username = "";
-            document.getElementById('login-message').innerText = 'Please Login';
-        }
-    })
-    .catch(error => {
-        console.error('error:', error);
-    });
-}
 
 // 添加商品到购物车，并保存到数据库
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', function () {
+        checkLoginStatus();
         if (!isLoggedIn) {
             alert('Please login before adding items to cart');
             return;
