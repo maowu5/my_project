@@ -12,10 +12,20 @@ if (isset($_SESSION['user_id'])) {
         // 更新商品数量
         $stmt = $pdo->prepare("UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?");
         $stmt->execute([$quantity, $user_id, $product_id]);
+        if ($stmt->execute([$quantity, $user_id, $product_id])) {
+        echo json_encode(['success' => true]);
+        } else {
+        echo json_encode(['success' => false, 'message' => 'Database update failed']);
+        }
     } else {
         // 如果数量为0，删除该商品
         $stmt = $pdo->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
         $stmt->execute([$user_id, $product_id]);
+         if ($stmt->execute([$quantity, $user_id, $product_id])) {
+        echo json_encode(['success' => true]);
+        } else {
+        echo json_encode(['success' => false, 'message' => 'Database update failed']);
+        }
     }
 
     echo json_encode(['success' => true]);
