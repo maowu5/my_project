@@ -19,7 +19,7 @@ services:
       - mynet
 
   myphp:
-    image: my_php_image:latest
+    image: myphp:latest
     volumes:
       - ./src:/var/www/html
     depends_on:
@@ -33,7 +33,7 @@ services:
         condition: on-failure
 
   mynginx:
-    image: nginx:latest
+    image: mynginx:latest
     ports:
       - "8080:80"
     volumes:
